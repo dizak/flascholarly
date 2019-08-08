@@ -19,6 +19,6 @@ services:
         networks:
             webnet:
                 aliases:
-                    - 'flask-scholarly' 
+                    - flask-scholarly
 networks:
     webnet:

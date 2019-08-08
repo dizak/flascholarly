@@ -12,8 +12,8 @@ import scholarly as sch
 
 app = Flask(__name__)
 
-@app.route('/author/<str:author>', defaults={'affiliation': None})
-@app.route('/author/<str:author>/affiliation/<str:affiliation>')
+@app.route('/author/<string:author>', defaults={'affiliation': None})
+@app.route('/author/<string:author>/affiliation/<string:affiliation>')
 def search(
     author,
     affiliation,

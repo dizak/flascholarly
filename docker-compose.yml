@@ -4,6 +4,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile-nginx
+        image: nginx:0.1.0
         ports:
             - '80:80'
         networks:

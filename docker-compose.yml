@@ -17,7 +17,7 @@ services:
         image: flask-scholarly:0.1.0
         networks:
             webnet:
-                alias:
+                aliases:
                     - 'flask-scholarly' 
 networks:
     webnet:

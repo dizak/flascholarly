@@ -8,7 +8,8 @@ services:
             - '80:80'
         networks:
             - webnet
-        depends_on: flask-scholarly
+        depends_on:
+            - flask-scholarly
     flask-scholarly:
         build:
             context: .

@@ -1,0 +1,22 @@
+version: 3
+services:
+    nginx:
+        build:
+            context: .
+            dockerfile: Dockerfile-nginx
+        ports:
+            - '80:80'
+        networks:
+            - webnet
+        depends_on: flask-scholarly
+    flask-scholarly:
+        build:
+            context: .
+            dockerfile: Dockerfile-flask-scholarly
+        image: flask-scholarly:0.1.0
+        networks:
+            webnet:
+                alias:
+                    - 'flask-scholarly' 
+networks:
+    webnet:

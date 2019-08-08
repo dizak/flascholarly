@@ -1,0 +1,14 @@
+FROM python:latest
+
+COPY requirements.txt /code/
+COPY setup.py /code/
+COPY  ./flask-scholarly/ /code/flask-scholarly/
+
+WORKDIR /code/
+
+RUN pip install gunicorn &&\
+    pip install -r requirements.txt
+
+WORKDIR /code/flask-scholarly/
+
+CMD gunicorn --bind 0.0.0.0:5000 app:app 

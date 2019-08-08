@@ -4,3 +4,4 @@ services: docker
 
 script:
     - docker-compose up
+    - curl localhost/author/marty_banks/affiliation/berkeley

@@ -11,7 +11,7 @@ class ResponseTests(unittest.TestCase):
         """
         Set-up imports, test-client and reference values.
         """
-        from scholarly.scholarly import app as tested_app
+        from flascholarly.app import app as tested_app
 
 
         self.client = tested_app.test_client()

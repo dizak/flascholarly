@@ -23,4 +23,7 @@ class ResponseTests(unittest.TestCase):
         """
         Test if response is correct.
         """
-        self.client.get('/author/pawelsiedlecki')
+        self.test_resp = json.loads(
+            str(self.client.get('/author/pawelsiedlecki').data, 'utf-8'),
+        )
+        self.assertDictEqual(self.ref_resp, self.test_resp)

@@ -16,6 +16,9 @@ class ResponseTests(unittest.TestCase):
 
         self.client = tested_app.test_client()
 
+        with open('test_data/ResponseTests/ref_pawelsiedlecki.json') as fin:
+            self.ref_resp = json.loads(fin.read())
+
     def test_response(self):
         """
         Test if response is correct.

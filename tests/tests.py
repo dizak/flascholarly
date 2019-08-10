@@ -18,6 +18,8 @@ class ResponseTests(unittest.TestCase):
 
         with open('test_data/ResponseTests/ref_pawelsiedlecki.json') as fin:
             self.ref_resp = json.loads(fin.read())
+        with open('test_data/ResponseTests/ref_pawelsiedlecki_ibb.json') as fin:
+            self.ref_resp_author_affiliation = json.loads(fin.read())
 
     def test_response(self):
         """

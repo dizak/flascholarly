@@ -29,3 +29,15 @@ class ResponseTests(unittest.TestCase):
             str(self.client.get('/author/pawelsiedlecki').data, 'utf-8'),
         )
         self.assertDictEqual(self.ref_resp, self.test_resp)
+
+    def test_response_author_affiliation(self):
+        """
+        Test if response is correct when queried for author and affiliation.
+        """
+        self.test_resp = json.loads(
+            str(
+                self.client.get('/author/pawelsiedlecki/affiliation/ibb').data,
+                'utf-8',
+            ),
+        )
+        self.assertDictEqual(self.ref_resp_author_affiliation, self.test_resp)

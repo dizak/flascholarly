@@ -12,6 +12,7 @@ from flask_cors import CORS
 import scholarly as sch
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/author/<string:author>', defaults={'affiliation': None})
 @app.route('/author/<string:author>/affiliation/<string:affiliation>')

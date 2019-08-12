@@ -8,6 +8,7 @@ static websites.
 
 from flask import Flask
 from flask import jsonify
+from flask_cors import CORS
 import scholarly as sch
 
 app = Flask(__name__)

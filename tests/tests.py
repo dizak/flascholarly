@@ -17,7 +17,6 @@ class ResponseTests(unittest.TestCase):
         """
         from flascholarly.app import app as tested_app
 
-
         self.client = tested_app.test_client()
 
         with open('test_data/ResponseTests/ref_pawelsiedlecki.json') as fin:

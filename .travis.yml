@@ -4,5 +4,4 @@ python:
     - '3.6'
 
 script:
-    - docker-compose up
-    - curl localhost/author/marty_banks/affiliation/berkeley
+    - 'python -m unittest tests.tests'

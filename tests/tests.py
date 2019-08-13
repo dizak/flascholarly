@@ -10,6 +10,10 @@ class ResponseTests(unittest.TestCase):
     def setUp(self):
         """
         Set-up imports, test-client and reference values.
+
+        Notes
+        ------- 
+        <citedby> is removed since it updates in real-life too quickly.
         """
         from flascholarly.app import app as tested_app
 

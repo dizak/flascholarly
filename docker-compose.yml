@@ -10,15 +10,15 @@ services:
         networks:
             - webnet
         depends_on:
-            - flask-scholarly
-    flask-scholarly:
+            - flascholarly
+    flascholarly:
         build:
             context: .
-            dockerfile: Dockerfile-flask-scholarly
-        image: flask-scholarly:0.1.0
+            dockerfile: Dockerfile-flascholarly
+        image: flascholarly:0.1.0
         networks:
             webnet:
                 aliases:
-                    - flask-scholarly
+                    - flascholarly
 networks:
     webnet:

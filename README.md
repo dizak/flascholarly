@@ -1,1 +1,1 @@
-# flask-scholarly - microservice based on scholarly module
+# flascholarly - microservice based on scholarly module

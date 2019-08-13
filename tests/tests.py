@@ -19,6 +19,7 @@ class ResponseTests(unittest.TestCase):
 
         self.client = tested_app.test_client()
 
+        self.ref_ajax_cors_header_val = ('Access-Control-Allow-Origin', '*')
         with open('test_data/ResponseTests/ref_pawelsiedlecki.json') as fin:
             self.ref_resp = json.loads(fin.read())
             del self.ref_resp['citedby']
@@ -48,3 +49,13 @@ class ResponseTests(unittest.TestCase):
         )
         del self.test_resp['citedby']
         self.assertDictEqual(self.ref_resp_author_affiliation, self.test_resp)
+
+    def test_response_ajax(self):
+        """
+        Tests if response is correct when performing ajax request.
+        """
+        self.test_resp = self.client.get(
+            '/author/pawelsiedlecki',
+            headers=[('X-Requested-With', 'XMLHttpRequest')],
+        ).headers,
+        assert self.ref_ajax_cors_header_val in self.test_resp[0]._list

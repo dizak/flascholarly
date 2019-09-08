@@ -17,6 +17,8 @@ import scholarly as sch
 app = Flask(__name__)
 CORS(app)
 
+cache = redis.StrictRedis(db=0, host='redis-db', port=6379)
+
 @app.route('/author/<string:author>', defaults={'affiliation': None})
 @app.route('/author/<string:author>/affiliation/<string:affiliation>')
 def search(

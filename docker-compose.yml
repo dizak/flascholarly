@@ -20,5 +20,11 @@ services:
             webnet:
                 aliases:
                     - flascholarly
+    redis-db:
+        image: redis:latest
+        networks:
+            webnet:
+                aliases:
+                    - redis-db
 networks:
     webnet:

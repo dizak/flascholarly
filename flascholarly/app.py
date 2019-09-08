@@ -41,7 +41,10 @@ def search(
         'citedby': first_result.citedby,
         'interests': first_result.interests,
         'url_picture': first_result.url_picture,
-    })
+    }
+    cache.set('{}+{}'.format(author, affiliation), json.dumps(first_result_dict))
+    cache.pexpire('{}+{}'.format(author, affiliation), datetime.timmedelta(days=1))
+    return jsonify(first_result_dict)
 
 
 if __name__ == '__main__':

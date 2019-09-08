@@ -35,7 +35,7 @@ def search(
         ', '.join((i for i in (author, affiliation) if i))
     )
     first_result = next(query)
-    return jsonify({
+    first_result_dict = {
         'name': first_result.name,
         'affiliation': first_result.affiliation,
         'citedby': first_result.citedby,

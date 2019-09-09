@@ -1,3 +1,4 @@
 scholarly
 flask
 flask-cors
+redis

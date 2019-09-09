@@ -36,8 +36,8 @@ def search(
             author,
             affiliation,
         ))
-    if first_result_json:
-        return first_result_json
+        if first_result_json:
+            return first_result_json
     query = sch.search_author(
         ', '.join((i for i in (author, affiliation) if i))
     )

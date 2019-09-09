@@ -49,8 +49,15 @@ def search(
         'interests': first_result.interests,
         'url_picture': first_result.url_picture,
     }
-    cache.set('{}+{}'.format(author, affiliation), json.dumps(first_result_dict))
-    cache.pexpire('{}+{}'.format(author, affiliation), datetime.timmedelta(days=1))
+    if cache:
+        cache.set(
+            '{}+{}'.format(author, affiliation),
+            json.dumps(first_result_dict),
+        )
+        cache.pexpire(
+            '{}+{}'.format(author, affiliation),
+            datetime.timedelta(days=1),
+        )
     return jsonify(first_result_dict)
 
 

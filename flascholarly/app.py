@@ -31,10 +31,11 @@ def search(
     author,
     affiliation,
 ):
-    first_result_json = cache.get('{}+{}'.format(
-        author,
-        affiliation,
-    ))
+    if cache:
+        first_result_json = cache.get('{}+{}'.format(
+            author,
+            affiliation,
+        ))
     if first_result_json:
         return first_result_json
     query = sch.search_author(

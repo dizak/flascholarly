@@ -1,5 +1,5 @@
 """
-This is the microservice-wrapper around scholarly module authored by 
+This is the microservice-wrapper around scholarly module authored by
 Steven A. Cholewniak. Scholarly is a Google Scholar scraper. The microservice
 serves mainly for getting the scholar information with plain javascript in
 static websites.

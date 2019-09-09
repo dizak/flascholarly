@@ -19,6 +19,12 @@ CORS(app)
 
 cache = redis.StrictRedis(db=0, host='redis-db', port=6379)
 
+try:
+    cache.info()
+except redis.exceptions.ConnectionError:
+    cache = None
+
+
 @app.route('/author/<string:author>', defaults={'affiliation': None})
 @app.route('/author/<string:author>/affiliation/<string:affiliation>')
 def search(

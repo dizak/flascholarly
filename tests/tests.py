@@ -88,5 +88,15 @@ class ResponseTests(unittest.TestCase):
         """
         Test if response is correct when multiple records are found.
         """
-        self.test_resp = self.client.get('/author/pawelsiedlecki')
-        print(self.test_resp.data)
+        self.maxDiff = None
+        self.test_resp = json.loads(
+            str(
+                self.client.get('/author/siedlecki').data,
+                'utf-8',
+            ),
+            encoding='utf-8',
+        )
+        for i in self.test_resp:
+            if 'citedby' in i.keys():
+                del i['citedby']
+        self.assertListEqual(self.ref_resp_multiple, self.test_resp)

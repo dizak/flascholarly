@@ -45,7 +45,6 @@ def search(
     if not results:
         return 'No record found'
     first_result = results[0]
-    first_result = next(query)
     first_result_dict = {
         'name': first_result.name,
         'affiliation': first_result.affiliation,

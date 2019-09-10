@@ -26,6 +26,7 @@ class ResponseTests(unittest.TestCase):
         with open('test_data/ResponseTests/ref_pawelsiedlecki_ibb.json') as fin:
             self.ref_resp_author_affiliation = json.loads(fin.read())
             del self.ref_resp_author_affiliation['citedby']
+        self.ref_resp_no_record = 'No record found'
 
     def test_response_author(self):
         """

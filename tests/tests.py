@@ -34,7 +34,7 @@ class ResponseTests(unittest.TestCase):
         """
         self.test_resp = json.loads(
             str(self.client.get('/author/pawelsiedlecki').data, 'utf-8'),
-        )
+        )[0]
         del self.test_resp['citedby']
         self.assertDictEqual(self.ref_resp, self.test_resp)
 
@@ -47,7 +47,7 @@ class ResponseTests(unittest.TestCase):
                 self.client.get('/author/pawelsiedlecki/affiliation/ibb').data,
                 'utf-8',
             ),
-        )
+        )[0]
         del self.test_resp['citedby']
         self.assertDictEqual(self.ref_resp_author_affiliation, self.test_resp)
 

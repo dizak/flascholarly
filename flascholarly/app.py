@@ -44,6 +44,17 @@ def search(
     results = list(query)
     if not results:
         return 'No record found'
+    results_l = []
+    for i in results:
+        results_d = {}
+        if hasattr(i, 'name'): results_d['name'] = i.name
+        if hasattr(i, 'affiliation'): results_d['affiliation'] = i.affiliation
+        if hasattr(i, 'author'): results_d['author'] = i.author
+        if hasattr(i, 'citedby'): results_d['citedby'] = i.citedby
+        if hasattr(i, 'interests'): results_d['interests'] = i.interests
+        if hasattr(i, 'url_picture'): results_d['url_picture'] = i.url_picture
+        results_l.append(results_d)
+    return jsonify(results_l)
     first_result = results[0]
     first_result_dict = {
         'name': first_result.name,

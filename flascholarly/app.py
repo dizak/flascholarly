@@ -41,7 +41,10 @@ def search(
     query = sch.search_author(
         ', '.join((i for i in (author, affiliation) if i))
     )
-    first_result = next(query)
+    results = list(query)
+    if not results:
+        return 'No record found'
+    first_result = results[0]
     first_result_dict = {
         'name': first_result.name,
         'affiliation': first_result.affiliation,

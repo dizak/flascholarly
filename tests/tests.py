@@ -26,6 +26,7 @@ class ResponseTests(unittest.TestCase):
         with open('test_data/ResponseTests/ref_pawelsiedlecki_ibb.json') as fin:
             self.ref_resp_author_affiliation = json.loads(fin.read())
             del self.ref_resp_author_affiliation['citedby']
+        self.ref_resp_no_record = 'No record found'
 
     def test_response_author(self):
         """
@@ -59,3 +60,26 @@ class ResponseTests(unittest.TestCase):
             headers=[('X-Requested-With', 'XMLHttpRequest')],
         ).headers,
         assert self.ref_ajax_cors_header_val in self.test_resp[0]._list
+
+    def test_response_no_record(self):
+        """
+        Test if response is correct when no record is found.
+        """
+        self.test_resp = self.client.get('/author/notusexistans')
+        self.assertEqual(
+            self.ref_resp_no_record,
+            str(
+                self.test_resp.data,
+                'utf-8',
+            ),
+        )
+        self.test_resp = self.client.get(
+            '/author/notusexistans/affiliation/nosuchplace',
+        )
+        self.assertEqual(
+            self.ref_resp_no_record,
+            str(
+                self.test_resp.data,
+                'utf-8',
+            ),
+        )

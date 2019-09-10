@@ -41,38 +41,24 @@ def search(
     query = sch.search_author(
         ', '.join((i for i in (author, affiliation) if i))
     )
-    results = list(query)
+    results = [
+        i.__dict__
+        for i in query
+    ]
     if not results:
         return 'No record found'
-    results_l = []
     for i in results:
-        results_d = {}
-        if hasattr(i, 'name'): results_d['name'] = i.name
-        if hasattr(i, 'affiliation'): results_d['affiliation'] = i.affiliation
-        if hasattr(i, 'author'): results_d['author'] = i.author
-        if hasattr(i, 'citedby'): results_d['citedby'] = i.citedby
-        if hasattr(i, 'interests'): results_d['interests'] = i.interests
-        if hasattr(i, 'url_picture'): results_d['url_picture'] = i.url_picture
-        results_l.append(results_d)
-    return jsonify(results_l)
-    first_result = results[0]
-    first_result_dict = {
-        'name': first_result.name,
-        'affiliation': first_result.affiliation,
-        'citedby': first_result.citedby,
-        'interests': first_result.interests,
-        'url_picture': first_result.url_picture,
-    }
+        del i['_filled']
     if cache:
         cache.set(
             '{}+{}'.format(author, affiliation),
-            json.dumps(first_result_dict),
+            json.dumps(results),
         )
         cache.pexpire(
             '{}+{}'.format(author, affiliation),
             datetime.timedelta(days=1),
         )
-    return jsonify(first_result_dict)
+    return jsonify(results)
 
 
 if __name__ == '__main__':

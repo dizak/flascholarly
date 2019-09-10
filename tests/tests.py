@@ -83,3 +83,10 @@ class ResponseTests(unittest.TestCase):
                 'utf-8',
             ),
         )
+
+    def test_multiple_records(self):
+        """
+        Test if response is correct when multiple records are found.
+        """
+        self.test_resp = self.client.get('/author/pawelsiedlecki')
+        print(self.test_resp.data)

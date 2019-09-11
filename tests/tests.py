@@ -101,6 +101,9 @@ class ResponseTests(unittest.TestCase):
             ),
             encoding='utf-8',
         )
+        #print(self.test_resp)
+        #with open('test_data/ResponseTests/ref_pawelsiedlecki_multiple.json', 'w') as fin:
+        #    fin.write(json.dumps(self.test_resp))
         for i in self.test_resp:
             if 'citedby' in i.keys():
                 del i['citedby']

@@ -26,6 +26,11 @@ class ResponseTests(unittest.TestCase):
         with open('test_data/ResponseTests/ref_pawelsiedlecki_ibb.json') as fin:
             self.ref_resp_author_affiliation = json.loads(fin.read())
             del self.ref_resp_author_affiliation['citedby']
+        with open('test_data/ResponseTests/ref_pawelsiedlecki_multiple.json') as fin:
+            self.ref_resp_multiple = json.loads(fin.read())
+            for i in self.ref_resp_multiple:
+                if 'citedby' in i:
+                    del i['citedby']
         self.ref_resp_no_record = 'No record found'
 
     def test_response_author(self):
@@ -34,7 +39,7 @@ class ResponseTests(unittest.TestCase):
         """
         self.test_resp = json.loads(
             str(self.client.get('/author/pawelsiedlecki').data, 'utf-8'),
-        )
+        )[0]
         del self.test_resp['citedby']
         self.assertDictEqual(self.ref_resp, self.test_resp)
 
@@ -47,7 +52,7 @@ class ResponseTests(unittest.TestCase):
                 self.client.get('/author/pawelsiedlecki/affiliation/ibb').data,
                 'utf-8',
             ),
-        )
+        )[0]
         del self.test_resp['citedby']
         self.assertDictEqual(self.ref_resp_author_affiliation, self.test_resp)
 
@@ -83,3 +88,23 @@ class ResponseTests(unittest.TestCase):
                 'utf-8',
             ),
         )
+
+    def test_multiple_records(self):
+        """
+        Test if response is correct when multiple records are found.
+        """
+        self.maxDiff = None
+        self.test_resp = json.loads(
+            str(
+                self.client.get('/author/siedlecki').data,
+                'utf-8',
+            ),
+            encoding='utf-8',
+        )
+        #print(self.test_resp)
+        #with open('test_data/ResponseTests/ref_pawelsiedlecki_multiple.json', 'w') as fin:
+        #    fin.write(json.dumps(self.test_resp))
+        for i in self.test_resp:
+            if 'citedby' in i.keys():
+                del i['citedby']
+        self.assertListEqual(self.ref_resp_multiple, self.test_resp)

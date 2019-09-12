@@ -13,7 +13,10 @@ import redis
 import json
 import datetime
 import scholarly as sch
-import utils
+try:
+    from . import utils
+except ImportError:
+    import utils
 
 app = Flask(__name__)
 CORS(app)

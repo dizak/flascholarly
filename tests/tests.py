@@ -1,5 +1,6 @@
 import unittest
 import json
+from itertools import product
 
 
 class ResponseTests(unittest.TestCase):
@@ -108,3 +109,37 @@ class ResponseTests(unittest.TestCase):
             if 'citedby' in i.keys():
                 del i['citedby']
         self.assertListEqual(self.ref_resp_multiple, self.test_resp)
+
+
+class UtilsTests(unittest.TestCase):
+    """
+    Tests of the utils module
+    """
+    def setUp(self):
+        """
+        Set-up test data
+        """
+        self.ref_ordered = 'pawelsiedlecki'
+
+        self.test_split_chars = ['+', '-', '_']
+        self.test_first_name = 'pawel'
+        self.test_second_name = 'siedlecki'
+        self.test_names = list(product(
+            [self.test_first_name],
+            self.test_split_chars,
+            [self.test_second_name],
+        )) + list(product(
+            [self.test_second_name],
+            self.test_split_chars,
+            [self.test_first_name],
+
+        ))
+
+    def test_order_author(self):
+        """
+        Test if order_author returns correct value.
+        """
+        from flascholarly.utils import order_author
+
+        for i in self.test_names:
+            self.assertEqual(self.ref_ordered, order_author(''.join(i)))

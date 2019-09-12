@@ -1,5 +1,6 @@
 import unittest
 import json
+from itertools import product
 
 
 class ResponseTests(unittest.TestCase):

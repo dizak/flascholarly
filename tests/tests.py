@@ -134,7 +134,6 @@ class UtilsTests(unittest.TestCase):
             [self.test_first_name],
 
         ))
-        print(list(self.test_names))
 
     def test_order_author(self):
         """

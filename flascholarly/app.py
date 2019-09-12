@@ -32,6 +32,7 @@ def search(
     author,
     affiliation,
 ):
+    ordered_author = utils.order_author(author)
     if cache:
         first_result_json = cache.get('{}+{}'.format(
             author,

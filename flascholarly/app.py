@@ -43,7 +43,7 @@ def search(
         ))
         if first_result_json:
             return first_result_json
-    query = sch.search_ordered_author(
+    query = sch.search_author(
         ', '.join((i for i in (ordered_author, affiliation) if i))
     )
     results = [i.__dict__ for i in query]

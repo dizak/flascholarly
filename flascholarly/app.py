@@ -35,13 +35,13 @@ def search(
     ordered_author = utils.order_author(author)
     if cache:
         first_result_json = cache.get('{}+{}'.format(
-            author,
+            ordered_author,
             affiliation,
         ))
         if first_result_json:
             return first_result_json
-    query = sch.search_author(
-        ', '.join((i for i in (author, affiliation) if i))
+    query = sch.search_ordered_author(
+        ', '.join((i for i in (ordered_author, affiliation) if i))
     )
     results = [i.__dict__ for i in query]
     if not results:
@@ -50,11 +50,11 @@ def search(
         del i['_filled']
     if cache:
         cache.set(
-            '{}+{}'.format(author, affiliation),
+            '{}+{}'.format(ordered_author, affiliation),
             json.dumps(results),
         )
         cache.pexpire(
-            '{}+{}'.format(author, affiliation),
+            '{}+{}'.format(ordered_author, affiliation),
             datetime.timedelta(days=1),
         )
     return jsonify(results)

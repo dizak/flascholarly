@@ -142,4 +142,4 @@ class UtilsTests(unittest.TestCase):
         from flascholarly.utils import order_author
 
         for i in self.test_names:
-            self.assertEqual(self.ref_ordered, order_author(i)) 
+            self.assertEqual(self.ref_ordered, order_author(''.join(i)))
